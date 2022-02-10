@@ -3,6 +3,7 @@ package com.bowen.zhang.spring_demo_i.business.domain;
 import java.util.Date;
 
 //this is a DTO class
+// join room and reservation and create new schema
 public class RoomReservation {
     private long roomID;
     private long guestID;

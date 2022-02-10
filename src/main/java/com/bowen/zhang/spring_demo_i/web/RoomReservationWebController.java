@@ -26,8 +26,9 @@ public class RoomReservationWebController {
     public String getReservations(@RequestParam(value = "date", required = false) String dateString, Model model) {
         Date date = DateUtils.createDateFromDateString(dateString);
         List<RoomReservation> roomReservations = this.reservationService.getRoomReservationForDate(date);
-        model.addAttribute("roomReservations", roomReservations); // transfer roomReservations arraylist to model,
-        // named roomReservations.
-        return "reservations"; // tell timeleaf engine to find a template named reservations and also pass the model to it.
+        model.addAttribute("roomReservations", roomReservations); // pass roomReservations arraylist to model,
+        // named roomReservations. this could be used in html file
+        return "reservations"; // tell timeleaf engine to find a template named reservations(reservations.html) and
+        // also pass the model to it.
     }
 }

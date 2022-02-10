@@ -15,7 +15,10 @@ public class Reservation {
     private Long roomID;
 
     @Column(name = "RES_DATE")
-    private Date resDate;
+    private Date reservationDate;
+
+    @Column(name = "Guest_ID")
+    private Long guestID;
 
     public Long getReservationId() {
         return reservationId;
@@ -33,12 +36,12 @@ public class Reservation {
         this.roomID = roomID;
     }
 
-    public Date getResDate() {
-        return resDate;
+    public Date getReservationDate() {
+        return reservationDate;
     }
 
-    public void setResDate(Date resDate) {
-        this.resDate = resDate;
+    public void setReservationDate(Date resDate) {
+        this.reservationDate = resDate;
     }
 
     public Long getGuestID() {
@@ -48,7 +51,4 @@ public class Reservation {
     public void setGuestID(Long guestID) {
         this.guestID = guestID;
     }
-
-    @Column(name = "Guest_ID")
-    private Long guestID;
 }

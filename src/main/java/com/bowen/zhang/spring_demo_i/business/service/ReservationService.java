@@ -19,7 +19,8 @@ public class ReservationService {
     private final GuestRepository guestRepository;
 
     @Autowired //annotated on constructor
-    public ReservationService(RoomRepository roomRepository, ReservationRepository reservationRepository, GuestRepository guestRepository) {
+    public ReservationService(RoomRepository roomRepository, ReservationRepository reservationRepository,
+                              GuestRepository guestRepository) {
         this.roomRepository = roomRepository;
         this.reservationRepository = reservationRepository;
         this.guestRepository = guestRepository;
@@ -36,7 +37,8 @@ public class ReservationService {
             roomReservationMap.put(room.getRoomId(), roomReservation);
         });
 
-        Iterable<Reservation> reservations = this.reservationRepository.findReservationByReservationDate(new java.sql.Date(date.getTime()));
+        Iterable<Reservation> reservations =
+                this.reservationRepository.findReservationByReservationDate(new java.sql.Date(date.getTime()));
         reservations.forEach(reservation -> {
             RoomReservation roomReservation = roomReservationMap.get(reservation.getRoomID());
             roomReservation.setDate(date);
@@ -51,6 +53,38 @@ public class ReservationService {
             roomReservations.add(roomReservationMap.get(id));
         }
 
+        roomReservations.sort(new Comparator<RoomReservation>() { //sort the room numbers
+            @Override
+            public int compare(RoomReservation o1, RoomReservation o2) {
+                if (o1.getRoomName() == o2.getRoomName()){
+                    return o1.getRoomNumber().compareTo(o2.getRoomNumber());
+                }
+                return o1.getRoomName().compareTo(o2.getRoomName());
+            }
+        });
+
         return roomReservations;
+    }
+
+    public List<Guest> getHotelGuests() {
+        Iterable<Guest> guests = this.guestRepository.findAll();
+        List<Guest> guestsList = new ArrayList<>();
+        guests.forEach(guest -> {
+            guestsList.add(guest);
+        });
+
+        guestsList.sort(new Comparator<Guest>() {
+            @Override
+            public int compare(Guest o1, Guest o2) {
+                if (o1.getLastName() == o2.getLastName()) {
+                    return o1.getFirstName().compareTo(o2.getFirstName());
+                } else {
+                    return o1.getLastName().compareTo(o2.getLastName());
+                }
+            }
+        });
+
+
+        return guestsList;
     }
 }

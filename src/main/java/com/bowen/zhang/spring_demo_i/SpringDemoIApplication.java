@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class SpringDemoIApplication {
 
-//    public static void main(String[] args) {
-//        SpringApplication.run(SpringDemoIApplication.class, args);
-//    }
-//
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDemoIApplication.class, args);
+    }
+
 //    @RestController
 //    @RequestMapping("/rooms")
 //    public class RoomController {
